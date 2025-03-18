@@ -1,0 +1,38 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment variables (SECRET KEYS & DB CONNECTIONS)
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor/IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# MongoDB data (Avoid committing local DB files)
+data/
+dump/
+*.gz
+
+# Build files (for frontend frameworks like React)
+dist/
+build/
+
+# Cache & Temp files
+.cache/
+.DS_Store
+Thumbs.db
+
+# Coverage reports (if using Jest or other testing tools)
+coverage/
