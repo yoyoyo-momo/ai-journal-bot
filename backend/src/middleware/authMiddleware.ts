@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { IUser } from "../models/User";
 
-interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Request {
     user?: IUser & {
         googleId: string;
     };

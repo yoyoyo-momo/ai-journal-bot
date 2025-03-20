@@ -9,17 +9,19 @@ router.get("/google/callback", googleAuthCallback);
 router.get("/logout", logoutUser);
 
 router.get("/user", (req, res) => {
-    const user = req.user as IUser;
-    if (user && user.googleId) {
-        res.json({
-            googleId: user.googleId,
-            username: user.username,
-            email: user.email,
-            avatar: user.avatar,
-        });
-    } else {
-        res.status(401).json({ message: "Not authenticated" });
+    if (!req.user) {
+        return res.status(401).json({ message: "Not authenticated" });
     }
+
+    const user = req.user as IUser;
+    res.json({
+        _id: user._id,
+        googleId: user.googleId,
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+        journals: user.journals || [],
+    });
 });
 
 export default router;

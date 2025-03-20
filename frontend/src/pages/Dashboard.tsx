@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
     const [user, setUser] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('http://localhost:5000/api/auth/user', {
@@ -24,19 +26,24 @@ const Dashboard: React.FC = () => {
 
 
     if (loading) return <p>Loading user data...</p>;
+
+    if (!user) {
+        navigate('/');
+        return null;
+    }
     
     return (
         <div>
             <h1>Dashboard</h1>
-            {user ? (
-                <div>
-                    <p>Welcome, {user.username}</p>
-                    <img src={user.avatar} alt="User avatar" />
-                    <a href="http://localhost:5000/api/auth/logout">Logout</a>
-                </div>
-            ) : (
-                <p>Loading user data...</p>
-            )}
+            <p>Welcome, {user.username}</p>
+            <img src={user.avatar} alt="User avatar" />
+
+            <br />
+            <Link to="/journal">
+                <button>Go to Journal</button>
+            </Link>
+
+            <a href="http://localhost:5000/api/auth/logout">Logout</a>
         </div>
     );
 };
